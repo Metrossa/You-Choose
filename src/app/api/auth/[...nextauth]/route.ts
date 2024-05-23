@@ -1,4 +1,5 @@
 import NextAuth from "next-auth";
+import DiscordProvider from "next-auth/providers/discord";
 
 import { authOptions } from "hash/server/auth";
 
