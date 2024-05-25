@@ -1,8 +1,46 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import NavigationBar from './_components/Navigation';
 
 const LandingPage = () => {
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const requestLocation = () => {
+    setLoading(true);
+    setMessage('Requesting location...');
+    
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        fetch('/api/location', {method:'POST'
+        , headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({latitude, longitude})
+        } )
+        .then(response=>response.json())
+        .then(data=> {
+          setLoading(false);
+          setMessage('Location Saved Sucessfully');
+        })
+        .catch((error) => {
+          setLoading(false);
+          setMessage('Failed to save location');
+          console.error('Error getting location:', error);
+        });
+      }, 
+      (error) => {
+        setLoading(false);
+        setMessage('Error getting location. Please ensure location services are enabled.'); // Error message
+        console.error('Error getting location:', error);
+      }
+    );
+  } else {
+    setLoading(false);
+    setMessage('Geolocation is not supported by this browser.'); // Error message
+  }
+};
+
   return (
     <div className="h-screen">
       <NavigationBar />
@@ -20,7 +58,12 @@ const LandingPage = () => {
           <div className="flex-grow border-r-1 border-black bg-pink-300" style={{ flexBasis: '25%' }}></div>
           <div className="flex-grow-0 border-r-1 border-black bg-yellow-300 relative flex items-center justify-center" style={{ flexBasis: '50%' }}>
             <button className="bg-black text-white py-2 px-4 rounded font italic text-2xl">Choose for me</button>
-            <button className="text-cream italic underline mt-5 ml-2">wya?</button>
+            <div className="flex-grow-0 border-r-1 border-black bg-yellow-300 relative flex items-center justify-center" style={{ flexBasis: '50%' }}>
+            <button onClick={requestLocation} className="text-cream italic underline mt-5 ml-2">
+              {loading ? 'Requesting location...' : 'wya?'}
+            </button>
+            {message && <p className="absolute top-full left-0 mt-2 text-sm text-black">{message}</p>}
+          </div>
           </div>
           <div className="flex-grow border-r-0 bg-pink-300" style={{ flexBasis: '25%' }}></div>
         </div>
