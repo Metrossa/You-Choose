@@ -1,8 +1,22 @@
-import NextAuth from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
+import NextAuth from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
 
-import { authOptions } from "hash/server/auth";
+const handler = NextAuth({
+  providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+  ],
+  secret: process.env.NEXTAUTH_SECRET!,
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      return true;
+    },
+    async redirect({ url, baseUrl }) {
+      return baseUrl + '/landing';
+    },
+  },
+});
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

@@ -1,4 +1,6 @@
+"use client";
 import React from 'react';
+import { signIn } from 'next-auth/react';
 
 const NavigationBar = () => {
   return (
@@ -10,7 +12,7 @@ const NavigationBar = () => {
       <div className="flex items-center space-x-8">
         <a href="/why?" className="text-white">Why?</a>
         <a href="/who?" className="text-white">Who?</a>
-        <button className="bg-black text-white py-2 px-4 rounded">Login</button>
+        <button onClick={() => signIn('google')} className="bg-black text-white py-2 px-4 rounded">Login</button>
       </div>
     </div>
   );
