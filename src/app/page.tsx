@@ -8,16 +8,16 @@ const LandingPage = () => {
       <div className="flex flex-col h-full">
         {/* Top 3 boxes */}
         <div className="flex" style={{ height: '70%' }}>
-          <div className="flex-grow border-r-4 border-black bg-yellow-300" style={{ flexBasis: '25%' }}></div>
-          <div className="flex-grow-0 border-r-4 border-black bg-pink-300" style={{ flexBasis: '50%' }}></div>
-          <div className="flex-grow border-r-2 bg-yellow-300" style={{ flexBasis: '25%' }}></div>
+          <div className="flex-grow border-r-1 border-black bg-yellow-300" style={{ flexBasis: '25%' }}></div>
+          <div className="flex-grow-0 border-r-1 border-black bg-pink-300" style={{ flexBasis: '50%' }}></div>
+          <div className="flex-grow border-r-1 bg-yellow-300" style={{ flexBasis: '25%' }}></div>
         </div>
         {/* Horizontal line */}
-        <div className="border-t-4 border-black"></div>
+        <div className="border-t-1 border-black"></div>
         {/* Bottom 3 boxes */}
         <div className="flex" style={{ height: '30%' }}>
-          <div className="flex-grow border-r-4 border-black bg-pink-300" style={{ flexBasis: '25%' }}></div>
-          <div className="flex-grow-0 border-r-4 border-black bg-yellow-300 relative flex items-center justify-center" style={{ flexBasis: '50%' }}>
+          <div className="flex-grow border-r-1 border-black bg-pink-300" style={{ flexBasis: '25%' }}></div>
+          <div className="flex-grow-0 border-r-1 border-black bg-yellow-300 relative flex items-center justify-center" style={{ flexBasis: '50%' }}>
             <button className="bg-black text-white py-2 px-4 rounded font italic text-2xl">Choose for me</button>
             <button className="text-cream italic underline mt-5 ml-2">wya?</button>
           </div>
